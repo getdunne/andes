@@ -41,6 +41,7 @@
 namespace ProjectInfo
 {
     const char* const  projectName    = "Andes-1";
+    const char* const  companyName    = "artfwo";
     const char* const  versionString  = "0.1";
     const int          versionNumber  = 0x100;
 }

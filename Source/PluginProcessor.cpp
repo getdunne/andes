@@ -222,13 +222,13 @@ AudioProcessorEditor* AndesAudioProcessor::createEditor()
 void AndesAudioProcessor::getStateInformation(MemoryBlock& destData)
 {
     internalParameters.setProperty("seed", (int64) noise.getSeed(), nullptr);
-    ScopedPointer<XmlElement> xml(parameters.state.createXml());
+    std::unique_ptr<XmlElement> xml(parameters.state.createXml());
     copyXmlToBinary(*xml, destData);
 }
 
 void AndesAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
-    ScopedPointer<XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
+    std::unique_ptr<XmlElement> xmlState(getXmlFromBinary(data, sizeInBytes));
     
     if (xmlState != nullptr)
     {
