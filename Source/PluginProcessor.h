@@ -21,6 +21,41 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Noise.h"
 
+class DumbLFO
+{
+public:
+    DumbLFO() : phase(0.0f), phaseDelta(0.0f) {}
+
+    void setFreqHz(double freqHz, double sampleRateHz) { phaseDelta = freqHz / sampleRateHz; }
+
+    float getSineSample()
+    {
+        phase += phaseDelta;
+        while (phase > 1.0f) phase -= 1.0f;
+        return 0.5f + 0.5f * sinf(phase);
+    }
+
+    float getSawSample()
+    {
+        phase += phaseDelta;
+        while (phase > 1.0f) phase -= 1.0f;
+        return phase;
+    }
+
+    float getSeeSawSample()
+    {
+        phase += phaseDelta;
+        while (phase > 1.0f) phase -= 1.0f;
+        if (phase < 0.5f)
+            return 2.0f * phase;
+        else
+            return 2.0f * (1.0f - phase);
+    }
+
+protected:
+    float phase, phaseDelta;
+};
+
 //==============================================================================
 /**
 */
@@ -71,6 +106,7 @@ public:
 private:
     //==============================================================================
     Synthesiser synth;
+    DumbLFO lfo1, lfo2;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AndesAudioProcessor)
 };

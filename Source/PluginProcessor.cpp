@@ -150,6 +150,8 @@ void AndesAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    lfo1.setFreqHz(0.15, sampleRate / samplesPerBlock);
+    lfo2.setFreqHz(0.5, sampleRate / samplesPerBlock);
 }
 
 void AndesAudioProcessor::releaseResources()
@@ -203,6 +205,9 @@ void AndesAudioProcessor::processBlock(AudioSampleBuffer& buffer, MidiBuffer& mi
             andesEditor->keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
         }
     }
+
+    parameters.getParameter("warping")->setValueNotifyingHost(lfo1.getSeeSawSample());
+    parameters.getParameter("offset")->setValueNotifyingHost(lfo2.getSawSample());
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
