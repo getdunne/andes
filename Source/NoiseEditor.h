@@ -48,10 +48,10 @@ private:
     Label octavesLabel;
     Label persistenceLabel;
 
-    ScopedPointer<SliderAttachment> warpAttachment;
-    ScopedPointer<SliderAttachment> offsetAttachment;
-    ScopedPointer<SliderAttachment> octavesAttachment;
-    ScopedPointer<SliderAttachment> persistenceAttachment;
+    std::unique_ptr<SliderAttachment> warpAttachment;
+    std::unique_ptr<SliderAttachment> offsetAttachment;
+    std::unique_ptr<SliderAttachment> octavesAttachment;
+    std::unique_ptr<SliderAttachment> persistenceAttachment;
 
     AndesAudioProcessor& processor;
 

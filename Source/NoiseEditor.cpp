@@ -31,7 +31,7 @@ NoiseEditor::NoiseEditor(AndesAudioProcessor& processor) : processor(processor)
         return "." + String(round(value * 100));
     });
     sliderGroup.addAndMakeVisible(&warpSlider);
-    warpAttachment = new SliderAttachment(processor.parameters, "warping", warpSlider);
+    warpAttachment.reset(new SliderAttachment(processor.parameters, "warping", warpSlider));
 
     offsetSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     offsetSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 15);
@@ -40,12 +40,12 @@ NoiseEditor::NoiseEditor(AndesAudioProcessor& processor) : processor(processor)
     });
     offsetSlider.setRotaryParameters(0, float_Pi * 2.0f, false);
     sliderGroup.addAndMakeVisible(&offsetSlider);
-    offsetAttachment = new SliderAttachment(processor.parameters, "offset", offsetSlider);
+    offsetAttachment.reset(new SliderAttachment(processor.parameters, "offset", offsetSlider));
 
     octavesSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     octavesSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 15);
     sliderGroup.addAndMakeVisible(&octavesSlider);
-    octavesAttachment = new SliderAttachment(processor.parameters, "octaves", octavesSlider);
+    octavesAttachment.reset(new SliderAttachment(processor.parameters, "octaves", octavesSlider));
 
     persistenceSlider.setSliderStyle(Slider::RotaryVerticalDrag);
     persistenceSlider.setTextBoxStyle(Slider::TextBoxBelow, true, 50, 15);
@@ -53,7 +53,7 @@ NoiseEditor::NoiseEditor(AndesAudioProcessor& processor) : processor(processor)
         return "." + String(round(value * 100));
     });
     sliderGroup.addAndMakeVisible(&persistenceSlider);
-    persistenceAttachment = new SliderAttachment(processor.parameters, "persistence", persistenceSlider);
+    persistenceAttachment.reset(new SliderAttachment(processor.parameters, "persistence", persistenceSlider));
 
     warpLabel.setText("Warping", NotificationType::dontSendNotification);
     warpLabel.setJustificationType(Justification::centred);

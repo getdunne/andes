@@ -48,10 +48,10 @@ private:
     Label susLabel;
     Label relLabel;
 
-    ScopedPointer<SliderAttachment> attAttachment;
-    ScopedPointer<SliderAttachment> decAttachment;
-    ScopedPointer<SliderAttachment> susAttachment;
-    ScopedPointer<SliderAttachment> relAttachment;
+    std::unique_ptr<SliderAttachment> attAttachment;
+    std::unique_ptr<SliderAttachment> decAttachment;
+    std::unique_ptr<SliderAttachment> susAttachment;
+    std::unique_ptr<SliderAttachment> relAttachment;
 
     AndesAudioProcessor& processor;
 

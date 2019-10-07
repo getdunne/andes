@@ -122,5 +122,6 @@
   <LIVE_SETTINGS>
     <LINUX/>
     <WINDOWS/>
+    <OSX/>
   </LIVE_SETTINGS>
 </JUCERPROJECT>
